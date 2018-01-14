@@ -38,7 +38,7 @@ bootRun {
 
 docker {
     dockerfile project.file('.dockerfile')
-    name "rustedshark/lost-abyss:latest"
+    name "${gradle.ext.docker_repo}/rustedshark/lost-abyss:${gradle.ext.docker_tag}"
     files jar.archivePath
     buildArgs(['JAR_FILE': "${jar.archiveName}"])
 }

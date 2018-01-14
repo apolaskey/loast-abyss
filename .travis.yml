@@ -4,12 +4,13 @@ jdk:
   - oraclejdk8
 services:
   - docker
+install:
+ - gradle build
 
 after_success:
 # AWS Login
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
-  - export AWS_ACCESS_KEY_ID=
-  - export AWS_SECRET_ACCESS_KEY=
   - $(aws ecr get-login --region us-east-1)
-  - gradle dockerPush
+  - gradle docker
+  - gradle dockerPush -Ddocker.repo=974758436222.dkr.ecr.us-east-1.amazonaws.com

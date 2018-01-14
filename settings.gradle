@@ -7,3 +7,7 @@ gradle.ext.guava_version = '23.6-jre'
 gradle.ext.spring_security_version = '5.0.0.RELEASE'
 gradle.ext.jedis_version = '2.9.0'
 gradle.ext.embedded_redis_version = '0.7.0'
+
+// Build & Deploy Properties
+gradle.ext.docker_tag = System.getProperty('docker.tag', 'latest')
+gradle.ext.docker_repo = System.getProperty('docker.repo', 'docker.io')
