@@ -1,7 +1,10 @@
 package com.rustedshark.mud;
 
 import com.rustedshark.mud.handlers.GameWebSocketHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
@@ -12,6 +15,8 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @SpringBootApplication
 @EnableWebSocket
 public class ApplicationContext extends SpringBootServletInitializer implements WebSocketConfigurer {
+
+    private static final Logger logger = LoggerFactory.getLogger(ApplicationContext.class);
 
     private final GameWebSocketHandler _gameSocketHandler;
 

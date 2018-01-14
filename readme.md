@@ -36,6 +36,8 @@ Building
 Running game server
  - Navigate to `lost-abyss`
  - Run `gradle bootRun`
+ - Optional run from Docker `gradle docker && gradle dockerRun`
+   - To stop `gradle dockerStop && gradle dockerRemoveContainer`
 
 ## Building and Running from Docker
  - TODO

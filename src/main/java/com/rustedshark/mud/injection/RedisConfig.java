@@ -11,23 +11,12 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class RedisConfig {
 
-    @Value("${mud.redis.port:6380}")
+    @Value("${mud.redis.port:6379}")
     private int _port;
-    private RedisServerBuilder _builder = new RedisServerBuilder();
 
     @Bean
     public RedisServer redisServer() {
-        RedisServer springRedisServer = new RedisServer("localhost", _port);
-        return springRedisServer;
-    }
-
-    @PostConstruct
-    public void start() {
-        _builder.reset();
-        _builder.port(_port)
-                .setting("bind 127.0.0.1")
-                .setting("maxmemory 256M")
-                .build().start();
+        return new RedisServer("localhost", _port);
     }
 
 }

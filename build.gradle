@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id "org.springframework.boot" version "1.5.9.RELEASE" // :( Plugin versions are final in Gradle
     id "com.palantir.docker" version "0.17.2"
+    id "com.palantir.docker-run" version "0.17.2"
 }
 
 group 'com.rustedshark'
@@ -32,8 +33,24 @@ dependencies {
     compile("it.ozimov:embedded-redis:${gradle.ext.embedded_redis_version}")
 }
 
+bootRun {
+    systemProperties = System.properties
+}
+
 docker {
-    name "${project.group}/${jar.baseName}"
+    dockerfile project.file('.dockerfile')
+    name "rustedshark/lost-abyss:latest"
     files jar.archivePath
     buildArgs(['JAR_FILE': "${jar.archiveName}"])
+}
+
+dockerRun {
+    name "local_lost-abyss"
+    ports "8080", "8080"
+    image "rustedshark/lost-abyss:latest"
+    daemonize false
+}
+
+task startMud(type: GradleBuild) {
+    tasks = ['dockerStop', 'dockerRemoveContainer', 'docker', 'dockerRun']
 }
