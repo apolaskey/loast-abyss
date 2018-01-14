@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "1.5.9.RELEASE" // :( Plugin versions are final in Gradle
+    id "com.palantir.docker" version "0.17.2"
+}
+
+group 'com.rustedshark'
+version '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat" // Using Undertow
+    compile.exclude module: "spring-boot-starter-logging" // Using Log4j2
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:${gradle.ext.spring_version}")
+    compile("org.springframework.boot:spring-boot-starter-websocket:${gradle.ext.spring_version}")
+    compile("org.springframework.boot:spring-boot-starter-undertow:${gradle.ext.spring_version}")
+    compile("org.springframework.boot:spring-boot-starter-log4j2:${gradle.ext.spring_version}")
+    compile("org.springframework.boot:spring-boot-starter-data-redis:${gradle.ext.spring_version}")
+
+    compile("org.springframework.security:spring-security-web:${gradle.ext.spring_security_version}")
+
+    compile("com.google.code.gson:gson:${gradle.ext.gson_version}")
+    compile("com.google.guava:guava:${gradle.ext.guava_version}")
+
+    compile("redis.clients:jedis:${gradle.ext.jedis_version}")
+    compile("it.ozimov:embedded-redis:${gradle.ext.embedded_redis_version}")
+}
+
+docker {
+    name "${project.group}/${jar.baseName}"
+    files jar.archivePath
+    buildArgs(['JAR_FILE': "${jar.archiveName}"])
+}
