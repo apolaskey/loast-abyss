@@ -4,6 +4,10 @@ jdk:
   - oraclejdk8
 services:
   - docker
+
+before_install:
+  - chmod +x ./scripts/deploy.sh
+
 install:
  - gradle build
 
