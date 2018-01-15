@@ -30,7 +30,6 @@ dependencies {
     compile("com.google.guava:guava:${gradle.ext.guava_version}")
 
     compile("redis.clients:jedis:${gradle.ext.jedis_version}")
-    compile("it.ozimov:embedded-redis:${gradle.ext.embedded_redis_version}")
 }
 
 bootRun {
@@ -39,7 +38,7 @@ bootRun {
 
 docker {
     dockerfile project.file('.dockerfile')
-    name "rustedshark/lost-abyss:latest"
+    name "${gradle.ext.docker_repo}/rustedshark/lost-abyss:${gradle.ext.docker_tag}"
     files jar.archivePath
     buildArgs(['JAR_FILE': "${jar.archiveName}"])
 }
@@ -48,9 +47,13 @@ dockerRun {
     name "local_lost-abyss"
     ports "8080", "8080"
     image "rustedshark/lost-abyss:latest"
-    daemonize false
+    daemonize true
 }
 
 task startMud(type: GradleBuild) {
     tasks = ['dockerStop', 'dockerRemoveContainer', 'docker', 'dockerRun']
+}
+
+task stopMud(type: GradleBuild) {
+    tasks = ['dockerStop', 'dockerRemoveContainer']
 }

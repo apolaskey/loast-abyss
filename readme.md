@@ -33,11 +33,12 @@ Building
  - Navigate to where `build.gradle` is located
  - Run `gradle build`
 
-Running game server
+Running game server locally
  - Navigate to `lost-abyss`
- - Run `gradle bootRun`
- - Optional run from Docker `gradle docker && gradle dockerRun`
-   - To stop `gradle dockerStop && gradle dockerRemoveContainer`
+ - (Recommended) Run `gradle bootRun`
+ - (Optional) Run like production `gradle startMud`
+   - This is a simple task that executes the following tasks
+     - `gradle dockerStop && gradle dockerRemoveContainer && gradle docker && gradle dockerPush && gradle dockerRun`
 
 ## Building and Running from Docker
  - TODO

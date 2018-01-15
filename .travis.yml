@@ -5,11 +5,11 @@ jdk:
 services:
   - docker
 
+before_install:
+  - chmod +x ./scripts/deploy.sh
+
+install:
+ - gradle build
+
 after_success:
-# AWS Login
-  - pip install --user awscli
-  - export PATH=$PATH:$HOME/.local/bin
-  - export AWS_ACCESS_KEY_ID=
-  - export AWS_SECRET_ACCESS_KEY=
-  - $(aws ecr get-login --region us-east-1)
-  - gradle dockerPush
+  - ./scripts/deploy.sh
