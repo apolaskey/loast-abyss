@@ -12,9 +12,6 @@ install:
  - gradle build
 
 after_success:
-  - ./scripts/deploy.sh
   - pip install --user awscli
-  - export PATH=$PATH:$HOME/.local/bin
-  - $(aws ecr get-login --no-include-email --region us-east-1)
   - gradle docker
-  - '[[ $TRAVIS_BRANCH == "master" ]] && gradle dockerPush -Ddocker.repo=974758436222.dkr.ecr.us-east-1.amazonaws.com'
+  - ./scripts/deploy.sh
