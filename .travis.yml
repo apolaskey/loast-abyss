@@ -8,6 +8,7 @@ install:
  - gradle build
 
 after_success:
+  - if: branch = master
 # AWS Login
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
