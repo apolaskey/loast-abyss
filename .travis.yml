@@ -12,4 +12,5 @@ install:
  - gradle build
 
 after_success:
+  - pwd
   - ./scripts/deploy.sh
