@@ -12,6 +12,4 @@ install:
  - gradle build
 
 after_success:
-  - pip install --user awscli
-  - gradle docker
   - ./scripts/deploy.sh
