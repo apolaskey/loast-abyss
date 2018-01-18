@@ -53,8 +53,20 @@ The following technologies are utilized outside of the build setup for hosting a
 
 Tools & Technologies Overview
  - **AWS CLI (ECS, EC2, S3)** - For deployment of this application
+    - Nothing actually in this project "depends" on it, it's just what we use for infra
  - **Travis CI** - Our continuous integration service
+    - Reliable and easy to use
  - **REDIS** - For active session state management
- - **Postgres** - Persistence solution, decided over NoSQL variants for MUD feature requirements
- - **Spring Framework** - Mature and Stable web framework, widely used across enterprises
- - **Docker** - Container solution, widely used
+    - Experimentation and study, no real reason outside of this
+ - **Postgres** - Persistence solution
+    - Picked as it's largely the most recommended RDBMS application
+ - **Spring Framework** - Core application framework for development
+    - Literally used everywhere, pluggable and useful to know
+ - **Docker** - Container solution
+    - Widely used and large community support
+ 
+ Opinionated Spring Customizations
+  - **Undertow** - Touted as one of the fastest backing servlet containers and reliable under high throughput
+    - [Source](https://www.techempower.com/benchmarks/#section=data-r14&hw=ph&test=fortune)
+  - **HikariCP** - One of the best JVM connection pools
+    - [Source](https://github.com/brettwooldridge/HikariCP/wiki/%22My-benchmark-doesn't-show-a-difference.%22)

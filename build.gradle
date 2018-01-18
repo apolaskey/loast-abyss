@@ -15,6 +15,7 @@ repositories {
 configurations {
     compile.exclude module: "spring-boot-starter-tomcat" // Using Undertow
     compile.exclude module: "spring-boot-starter-logging" // Using Log4j2
+    compile.exclude module: "tomcat-jbdc" // Using HikariCP
 }
 
 dependencies {
@@ -22,14 +23,23 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-websocket:${gradle.ext.spring_version}")
     compile("org.springframework.boot:spring-boot-starter-undertow:${gradle.ext.spring_version}")
     compile("org.springframework.boot:spring-boot-starter-log4j2:${gradle.ext.spring_version}")
+    compile("org.springframework.boot:spring-boot-starter-jdbc:${gradle.ext.spring_version}")
     compile("org.springframework.boot:spring-boot-starter-data-redis:${gradle.ext.spring_version}")
 
     compile("org.springframework.security:spring-security-web:${gradle.ext.spring_security_version}")
+
+    compile("org.springframework.boot:spring-boot-devtools:${gradle.ext.spring_version}")
 
     compile("com.google.code.gson:gson:${gradle.ext.gson_version}")
     compile("com.google.guava:guava:${gradle.ext.guava_version}")
 
     compile("redis.clients:jedis:${gradle.ext.jedis_version}")
+    compile("org.postgresql:postgresql:${gradle.ext.postgres_version}")
+    compile("org.jdbi:jdbi:${gradle.ext.jbdi_version}")
+
+    compile("com.zaxxer:HikariCP:${gradle.ext.hikaricp_version}")
+
+    compile ("com.vdurmont:emoji-java:${gradle.ext.emoji_version}")
 }
 
 bootRun {
@@ -51,7 +61,7 @@ dockerRun {
 }
 
 task startMud(type: GradleBuild) {
-    tasks = ['dockerStop', 'dockerRemoveContainer', 'docker', 'dockerRun']
+    tasks = ['dockerStop', 'dockerRemoveContainer', 'build', 'docker', 'dockerRun']
 }
 
 task stopMud(type: GradleBuild) {
