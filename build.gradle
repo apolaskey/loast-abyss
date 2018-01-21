@@ -8,6 +8,10 @@ plugins {
 group 'com.rustedshark'
 version '0.0.1'
 
+processResources {
+    expand(project.properties)
+}
+
 repositories {
     mavenCentral()
 }
@@ -23,6 +27,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-websocket:${gradle.ext.spring_version}")
     compile("org.springframework.boot:spring-boot-starter-undertow:${gradle.ext.spring_version}")
     compile("org.springframework.boot:spring-boot-starter-log4j2:${gradle.ext.spring_version}")
+    compile("org.springframework.boot:spring-boot-starter-actuator:${gradle.ext.spring_version}")
     compile("org.springframework.boot:spring-boot-starter-jdbc:${gradle.ext.spring_version}")
     compile("org.springframework.boot:spring-boot-starter-data-redis:${gradle.ext.spring_version}")
 
@@ -35,7 +40,8 @@ dependencies {
 
     compile("redis.clients:jedis:${gradle.ext.jedis_version}")
     compile("org.postgresql:postgresql:${gradle.ext.postgres_version}")
-    compile("org.jdbi:jdbi:${gradle.ext.jbdi_version}")
+    compile("org.jdbi:jdbi3-core:${gradle.ext.jbdi_version}")
+    compile("org.jdbi:jdbi3-sqlobject:${gradle.ext.jbdi_version}")
 
     compile("com.zaxxer:HikariCP:${gradle.ext.hikaricp_version}")
 

@@ -1,7 +1,8 @@
 package com.rustedshark.mud.handlers;
 
-import com.rustedshark.mud.components.GameSessionService;
+import com.rustedshark.mud.services.session.SessionService;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -15,42 +16,37 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 @Component
 public class GameWebSocketHandler extends TextWebSocketHandler {
 
-    @Autowired(required = false)
-    private Logger logger;
+    private static final Logger logger = LoggerFactory.getLogger(GameWebSocketHandler.class);
 
-    private final GameSessionService gameSessions;
+    private final SessionService _sessionService;
 
     @Autowired public GameWebSocketHandler(
-            GameSessionService gameSessionService
+            SessionService gameSessionService
     ) {
-        gameSessions = gameSessionService;
+        _sessionService = gameSessionService;
     }
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        super.afterConnectionEstablished(session);
-        logger.info("New Session Incoming: {}", gameSessions.hashCode());
-        gameSessions._sessions.add(session);
+    public void afterConnectionEstablished(final WebSocketSession session) throws Exception {
+        logger.info("Incoming Connection: {} from [ {} | {} ]",
+                session.getId(), session.getRemoteAddress(), session.getLocalAddress());
         session.sendMessage(new TextMessage("Please input username:"));
     }
 
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+    protected void handleTextMessage(final WebSocketSession session, final TextMessage message) {
         logger.info("[{} | {}] - {} sent:\r\n{}", session.getRemoteAddress(), session.getLocalAddress(), session.getId(), message.getPayload());
         // State switches and command handling
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    public void afterConnectionClosed(final WebSocketSession session, final CloseStatus status) {
         // Cleanup player session
-        gameSessions._sessions.remove(session);
-        logger.info("Active Players Session: {}", gameSessions._sessions.size());
-        super.afterConnectionClosed(session, status);
+        //logger.info("Active Players Session: {}", _sessionService.getActiveSessions.size());
     }
 
     @Override
-    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+    public void handleTransportError(final WebSocketSession session, final Throwable exception) {
         // Critical Error detection
-        super.handleTransportError(session, exception);
     }
 }

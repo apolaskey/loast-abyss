@@ -1,5 +1,7 @@
-package com.rustedshark.mud.injection;
+package com.rustedshark.mud.configs;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,8 @@ import javax.sql.DataSource;
 
 @Configuration
 public class PostgresConfig {
+
+    private static final HikariConfig hikariConfig = new HikariConfig();
 
     @Value("${mud.postgres.host:localhost}")
     private String _host;
@@ -22,17 +26,22 @@ public class PostgresConfig {
     @Value("${mud.postgres.username:lostabyss}")
     private String _username;
 
-    @Value("${mud.postgres.password:fakepassword}")
+    @Value("${mud.postgres.password:@Cheese88}")
     private String _password;
 
-    @Bean
-    public DataSource postgresDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://" + _host + ":" + _port + "/" + _dbName);
-        dataSource.setUsername(_username);
-        dataSource.setPassword(_password);
+    private HikariDataSource _datasource;
 
-        return dataSource;
+    @Bean(name = "dataSource")
+    public DataSource postgresDataSource() {
+        String jdbcUrl = "jdbc:postgresql://" + _host + ":" + _port + "/" + _dbName;
+
+        hikariConfig.setJdbcUrl(jdbcUrl);
+        hikariConfig.setUsername(_username);
+        hikariConfig.setPassword(_password);
+        hikariConfig.setDriverClassName("org.postgresql.Driver");
+
+        _datasource = new HikariDataSource(hikariConfig);
+
+        return _datasource;
     }
 }
