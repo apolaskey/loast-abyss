@@ -1,9 +1,9 @@
-package com.rustedshark.mud.models.player;
+package com.rustedshark.mud.data.persistence;
 
 /**
  * Model for a players account:
  *  Accounts typically have multiple players, and should host information that needs to be across them
  */
-public class PlayerAccount {
+public interface GameAccountDao {
 
 }

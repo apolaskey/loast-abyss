@@ -1,6 +1,6 @@
 package com.rustedshark.mud.services.session;
 
-import com.rustedshark.mud.models.player.PlayerSession;
+import com.rustedshark.mud.data.game.player.PlayerSession;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.List;

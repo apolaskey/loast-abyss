@@ -9,6 +9,9 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
+/**
+ * Mud Postgres binding w/Hikari support
+ */
 @Configuration
 public class PostgresConfig {
 

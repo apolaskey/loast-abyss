@@ -1,5 +1,8 @@
 package com.rustedshark.mud.handlers;
 
+import com.rustedshark.mud.data.game.player.PlayerSession;
+import com.rustedshark.mud.handlers.flows.CommandHandler;
+import com.rustedshark.mud.injection.RuntimeInjector;
 import com.rustedshark.mud.services.session.SessionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +12,8 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Our defacto "Main" for when a new socket is opened and players begin connecting
@@ -30,13 +35,14 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     public void afterConnectionEstablished(final WebSocketSession session) throws Exception {
         logger.info("Incoming Connection: {} from [ {} | {} ]",
                 session.getId(), session.getRemoteAddress(), session.getLocalAddress());
-        session.sendMessage(new TextMessage("Please input username:"));
+        _sessionService.createGameSession(session);
     }
 
     @Override
     protected void handleTextMessage(final WebSocketSession session, final TextMessage message) {
         logger.info("[{} | {}] - {} sent:\r\n{}", session.getRemoteAddress(), session.getLocalAddress(), session.getId(), message.getPayload());
         // State switches and command handling
+        PlayerSession playerSession = _sessionService.sessionExists(session).orElseGet(() -> _sessionService.createGameSession(session));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.rustedshark.mud.models.entity;
+package com.rustedshark.mud.data.game.entity;
 
 public interface EntityApperance {
     default String firstName() {

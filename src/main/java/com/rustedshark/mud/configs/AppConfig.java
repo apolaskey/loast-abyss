@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
+/**
+ * General application bindings
+ */
 @Configuration
 public class AppConfig {
     @Bean(BeanNames.TEST)

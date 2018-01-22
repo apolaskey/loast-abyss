@@ -1,11 +1,11 @@
-package com.rustedshark.mud.models.stats;
+package com.rustedshark.mud.data.game.stats;
 
 public class CombatStats {
 
     private int _maxHp = 20, _maxMana = 100, _maxMovement = 100, _maxInitiative = 1;
     private int _hp = _maxHp, _mana = _maxMana, _movement = _maxMovement, _initiative = _maxInitiative;
 
-    public CombatStats refreshStats(TertiaryStats tertiaryStats) {
+    public CombatStats refreshStats(CoreStats tertiaryStats) {
         return this;
     }
 

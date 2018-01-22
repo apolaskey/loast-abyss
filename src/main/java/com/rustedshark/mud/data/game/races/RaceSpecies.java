@@ -1,4 +1,4 @@
-package com.rustedshark.mud.models.races;
+package com.rustedshark.mud.data.game.races;
 
 public enum RaceSpecies {
     Humans,

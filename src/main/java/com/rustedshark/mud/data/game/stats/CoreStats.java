@@ -1,6 +1,6 @@
-package com.rustedshark.mud.models.stats;
+package com.rustedshark.mud.data.game.stats;
 
-public class TertiaryStats {
+public class CoreStats {
 
     private int _strength = 1, _dexterity = 1, _constitution = 1, _intelligence = 1, _wisdom = 1, _charisma = 1, _luck = 0;
 
@@ -26,31 +26,31 @@ public class TertiaryStats {
         return _luck;
     }
 
-    public TertiaryStats setStrength(int value) {
+    public CoreStats setStrength(int value) {
         _strength = value;
         return this;
     }
-    public TertiaryStats setDexterity(int value) {
+    public CoreStats setDexterity(int value) {
         _dexterity = value;
         return this;
     }
-    public TertiaryStats setConstitution(int value) {
+    public CoreStats setConstitution(int value) {
         _constitution = value;
         return this;
     }
-    public TertiaryStats setIntelligence(int value) {
+    public CoreStats setIntelligence(int value) {
         _intelligence = value;
         return this;
     }
-    public TertiaryStats setWisdom(int value) {
+    public CoreStats setWisdom(int value) {
         _wisdom = value;
         return this;
     }
-    public TertiaryStats setCharisma(int value) {
+    public CoreStats setCharisma(int value) {
         _charisma = value;
         return this;
     }
-    public TertiaryStats setLuck(int value) {
+    public CoreStats setLuck(int value) {
         _luck = value;
         return this;
     }

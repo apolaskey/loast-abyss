@@ -6,6 +6,7 @@ Design Focus
  - [ ] Multi-classing
  - [ ] PK allowed
  - [ ] Newbie Friendly
+ - [ ] 120 char console
 
 ## Building and Running from Source
 Several build tools / SDK's will need to be installed if not already present
@@ -56,8 +57,6 @@ Tools & Technologies Overview
     - Nothing actually in this project "depends" on it, it's just what we use for infra
  - **Travis CI** - Our continuous integration service
     - Reliable and easy to use
- - **REDIS** - For active session state management
-    - Experimentation and study, no real reason outside of this
  - **Postgres** - Persistence solution
     - Picked as it's largely the most recommended RDBMS application
  - **Spring Framework** - Core application framework for development
