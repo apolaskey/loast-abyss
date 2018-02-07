@@ -34,7 +34,8 @@ dependencies {
 
     compile("javax.inject:javax.inject:1")
 
-    compile("com.google.code.gson:gson:${gradle.ext.gson_version}")
+    compile("com.jsoniter:jsoniter:${gradle.ext.jsoniter_version}")
+
     compile("com.google.guava:guava:${gradle.ext.guava_version}")
 
     compile("org.postgresql:postgresql:${gradle.ext.postgres_version}")

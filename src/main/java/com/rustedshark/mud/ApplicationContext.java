@@ -1,9 +1,8 @@
 package com.rustedshark.mud;
 
-import com.rustedshark.mud.handlers.GameWebSocketHandler;
+import com.rustedshark.mud.injection.components.GameWebSocketHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
@@ -11,16 +10,17 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+import javax.inject.Inject;
+
 @SpringBootApplication
 @EnableWebSocket
-public class MudAppContext extends SpringBootServletInitializer implements WebSocketConfigurer {
+public class ApplicationContext extends SpringBootServletInitializer implements WebSocketConfigurer {
 
-    private static final Logger logger = LoggerFactory.getLogger(MudAppContext.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApplicationContext.class);
 
     private final GameWebSocketHandler _gameSocketHandler;
 
-    @Autowired
-    public MudAppContext(GameWebSocketHandler handler) {
+    @Inject public ApplicationContext(GameWebSocketHandler handler) {
         this._gameSocketHandler = handler;
     }
 
@@ -34,6 +34,6 @@ public class MudAppContext extends SpringBootServletInitializer implements WebSo
      * @param args {@link String} arguments
      */
     public static void main(String[] args) {
-        SpringApplication.run(MudAppContext.class, args);
+        SpringApplication.run(ApplicationContext.class, args);
     }
 }

@@ -1,4 +1,4 @@
-package com.rustedshark.mud.data.security;
+package com.rustedshark.mud.security;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

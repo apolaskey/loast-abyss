@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Import;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.sql.DataSource;
 
 /**
  * JBDI Binding, wraps around any generic data source bean
  */
-@DependsOn("dataSource")
+@DependsOn("DataSource")
 @Configuration
 public class JDBIConfig {
 
@@ -22,7 +25,7 @@ public class JDBIConfig {
 
     private final Jdbi _jdbi;
 
-    @Autowired public JDBIConfig(DataSource dataSource) {
+    @Inject public JDBIConfig(DataSource dataSource) {
         logger.info("Assigned {} to JBDI client", dataSource.getClass().getSimpleName());
         _jdbi = Jdbi.create(dataSource);
         _jdbi.installPlugin(new SqlObjectPlugin());

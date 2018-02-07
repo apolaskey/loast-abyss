@@ -1,6 +1,6 @@
 package com.rustedshark.mud.data.game.player;
 
-import com.rustedshark.mud.data.game.entity.EntityApperance;
+import com.rustedshark.mud.data.game.entity.Background;
 import com.rustedshark.mud.data.game.races.RaceEntity;
 import com.rustedshark.mud.data.game.stats.CombatStats;
 import com.rustedshark.mud.data.game.stats.CoreStats;
@@ -10,13 +10,13 @@ import com.rustedshark.mud.data.game.stats.CoreStats;
  */
 public class Player {
 
-    private EntityApperance _apperance;
+    private Background background;
     private RaceEntity _race;
     private CoreStats _stats;
     private CombatStats _combatStats = new CombatStats();
 
-    public EntityApperance apperance() {
-        return _apperance;
+    public Background apperance() {
+        return background;
     }
 
     public RaceEntity race() {

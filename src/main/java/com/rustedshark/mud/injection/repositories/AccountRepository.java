@@ -1,4 +1,4 @@
-package com.rustedshark.mud.repositories;
+package com.rustedshark.mud.injection.repositories;
 
 import org.springframework.stereotype.Repository;
 

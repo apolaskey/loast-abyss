@@ -11,13 +11,13 @@ import java.util.TimeZone;
  * General application bindings
  */
 @Configuration
-public class AppConfig {
+public class LocalConfig {
     @Bean(BeanNames.TEST)
     public String thing() {
         return "Cool";
     }
 
-    public AppConfig() {
+    public LocalConfig() {
         // Regardless of what, use UTC
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }

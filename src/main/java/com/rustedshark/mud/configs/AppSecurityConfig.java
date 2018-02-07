@@ -1,4 +1,4 @@
-package com.rustedshark.mud.data.security;
+package com.rustedshark.mud.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

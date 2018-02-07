@@ -1,14 +1,14 @@
 package com.rustedshark.mud.injection;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
 
 @Component
 public class RuntimeInjector {
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    @Autowired
+    @Inject
     private AutowiredAnnotationBeanPostProcessor _aaProcessor;
 
     public <T> T bind(T instance) {
